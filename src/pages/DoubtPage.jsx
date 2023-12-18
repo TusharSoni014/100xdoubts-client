@@ -25,7 +25,7 @@ export default function DoubtPage() {
               <img
                 className=" w-8 h-8 rounded-full"
                 src={doubtPost?.author?.avatar}
-                alt=""
+                alt="user avatar"
               />
               <p>{doubtPost?.author?.username}</p>
             </div>
