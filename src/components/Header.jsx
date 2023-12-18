@@ -24,7 +24,9 @@ export default function Header() {
 
   return (
     <nav className="__header h-[60px] bg-gray-900 text-white p-3 flex justify-between items-center">
-      <h3 className="font-bold">100xDoubts</h3>
+      <h3 onClick={() => navigate("/")} className="font-bold cursor-pointer">
+        100xDoubts
+      </h3>
       <div className="__btn_container flex justify-center items-center gap-3">
         {isLoggedIn ? (
           <>

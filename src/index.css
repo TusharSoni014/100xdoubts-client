@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.quill > .ql-container > .ql-editor {
+  outline: none !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: grey;
+}
