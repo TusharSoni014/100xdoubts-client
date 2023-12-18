@@ -8,6 +8,7 @@ import { updateLoginStatus, updateUser } from "../redux/slices/appSlice";
 
 export default function Header() {
   const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
+  const user = useSelector((state) => state.appSlice.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +25,7 @@ export default function Header() {
   return (
     <nav className="__header h-[60px] bg-gray-900 text-white p-3 flex justify-between items-center">
       <h3 className="font-bold">100xDoubts</h3>
-      <div className="__btn_container">
+      <div className="__btn_container flex justify-center items-center gap-3">
         {isLoggedIn ? (
           <>
             <button
@@ -32,6 +33,13 @@ export default function Header() {
               className="bg-red-500 transition hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               <CiLogout />
+            </button>
+            <button className="__avatar_btn w-[40px] h-[40px]">
+              <img
+                className="w-full h-full rounded-[50%]"
+                src={user.picture}
+                alt=""
+              />
             </button>
           </>
         ) : (
