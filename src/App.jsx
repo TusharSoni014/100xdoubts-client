@@ -7,6 +7,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signon from "./pages/Signon";
 import Create from "./pages/Create";
+import DoubtPage from "./pages/DoubtPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signon" element={<Signon />}></Route>
           <Route path="/create" element={<Create />}></Route>
+          <Route path="/doubt/:id" element={<DoubtPage />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
     </>

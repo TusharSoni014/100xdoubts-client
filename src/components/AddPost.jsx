@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { handleCatch } from "../utils/utilFunctions";
+import axiosClient from "../utils/axiosClient";
+import { toast } from "react-toastify";
 
 export default function AddPost() {
   const [description, setDescription] = useState("");
@@ -26,7 +28,17 @@ export default function AddPost() {
   const handlePostDoubt = async (e) => {
     e.preventDefault();
     try {
-      console.log({ title: title, description: description });
+      if (description) {
+        await axiosClient.post("/create", {
+          title: title,
+          description: description,
+        });
+        setDescription("");
+        setTitle("");
+        toast.success("Doubt posted successfully!");
+      } else {
+        toast.warn("Description cannot be blank!");
+      }
     } catch (error) {
       handleCatch(error);
     }
