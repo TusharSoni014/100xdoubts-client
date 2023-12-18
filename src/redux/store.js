@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import appSlice from "./slices/appSlice";
 import doubtPageSlice from "./slices/doubtPageSlice";
+import homeSlice from "./slices/homeSlice";
 
 const persistConfig = {
   key: "appSlice", // key is a unique identifier for the persisted data
@@ -14,6 +15,7 @@ const persistedAppReducer = persistReducer(persistConfig, appSlice);
 const rootReducer = combineReducers({
   appSlice: persistedAppReducer,
   doubtPageSlice: doubtPageSlice,
+  homeSlice: homeSlice,
   // Add other slices or reducers here if needed
 });
 
