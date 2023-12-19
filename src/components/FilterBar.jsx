@@ -80,8 +80,8 @@ export default function FilterBar() {
         className="block p-2 border rounded-md shadow-md transition bg-gray-800 disabled:bg-gray-400"
       >
         <option value="latest">Latest</option>
-        <option value="asc-upvotes">Highest Upvotes</option>
-        <option value="des-upvotes">Lowest Upvotes</option>
+        <option value="asc-upvotes">Lowest Upvotes</option>
+        <option value="des-upvotes">Highest Upvotes</option>
       </select>
     </div>
   );

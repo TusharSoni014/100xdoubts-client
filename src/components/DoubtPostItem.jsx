@@ -69,7 +69,7 @@ export default function DoubtPostItem({ post }) {
           </div>
         </div>
       </div>
-      <div className="__post_footer border-t-2 border-gray-600 mt-3">
+      <div className="__post_footer border-t-2 border-gray-600 mt-3 flex items-center gap-3">
         <p className="text-gray-200 rounded-full w-fit px-3 my-2 bg-gray-600">
           Posted By: <span className="font-bold">{post?.author?.username}</span>
         </p>
