@@ -4,10 +4,14 @@ import "react-quill/dist/quill.bubble.css";
 import { handleCatch } from "../utils/utilFunctions";
 import axiosClient from "../utils/axiosClient";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPost() {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
+  const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
+  const navigate = useNavigate();
 
   const modules = {
     toolbar: [
@@ -28,13 +32,17 @@ export default function AddPost() {
   const handlePostDoubt = async (e) => {
     e.preventDefault();
     try {
-      await axiosClient.post("/create", {
-        title: title,
-        description: description,
-      });
-      setTitle("");
-      setDescription("");
-      toast.success("Doubt posted successfully!");
+      if (isLoggedIn) {
+        await axiosClient.post("/create", {
+          title: title,
+          description: description,
+        });
+        setTitle("");
+        setDescription("");
+        toast.success("Doubt posted successfully!");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
       handleCatch(error);
     }

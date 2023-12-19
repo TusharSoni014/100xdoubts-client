@@ -4,16 +4,26 @@ import storage from "redux-persist/lib/storage";
 import appSlice from "./slices/appSlice";
 import doubtPageSlice from "./slices/doubtPageSlice";
 import homeSlice from "./slices/homeSlice";
+import newDoubtSlice from "./slices/newDoubtSlice";
 
-const persistConfig = {
+const appSlicePersistConfig = {
   key: "appSlice", // key is a unique identifier for the persisted data
   storage,
 };
+const newDoubtSlicePersistConfig = {
+  key: "newDoubtSlice",
+  storage,
+};
 
-const persistedAppReducer = persistReducer(persistConfig, appSlice);
+const persistedAppReducer = persistReducer(appSlicePersistConfig, appSlice);
+const persistedDoubtReducer = persistReducer(
+  newDoubtSlicePersistConfig,
+  newDoubtSlice
+);
 
 const rootReducer = combineReducers({
   appSlice: persistedAppReducer,
+  newDoubtSlice: persistedDoubtReducer,
   doubtPageSlice: doubtPageSlice,
   homeSlice: homeSlice,
   // Add other slices or reducers here if needed

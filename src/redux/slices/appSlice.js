@@ -13,8 +13,18 @@ const appSlice = createSlice({
     updateLoginStatus: (state, action) => {
       state.isLoggedIn = action.payload;
     },
+    updateUpvotedPosts: (state, action) => {
+      const postId = action.payload;
+      const index = state.user.upvotedPosts.findIndex((id) => id === postId);
+      if (index !== -1) {
+        state.user.upvotedPosts.splice(index, 1);
+      } else {
+        state.user.upvotedPosts.push(postId);
+      }
+    },
   },
 });
 
-export const { updateUser, updateLoginStatus } = appSlice.actions;
+export const { updateUser, updateLoginStatus, updateUpvotedPosts } =
+  appSlice.actions;
 export default appSlice.reducer;
