@@ -8,7 +8,7 @@ export const fetchLatestPosts = createAsyncThunk(
     const { page } = body;
     try {
       const response = await axiosClient.get(`/get-all-posts/${page}`);
-      return response.data.allPosts;
+      return response.data;
     } catch (error) {
       handleCatch(error);
     }
@@ -36,4 +36,4 @@ const homeSlice = createSlice({
   },
 });
 
-export default homeSlice.reducer
+export default homeSlice.reducer;

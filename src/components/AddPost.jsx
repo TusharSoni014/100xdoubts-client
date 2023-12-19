@@ -28,17 +28,13 @@ export default function AddPost() {
   const handlePostDoubt = async (e) => {
     e.preventDefault();
     try {
-      if (description) {
-        await axiosClient.post("/create", {
-          title: title,
-          description: description,
-        });
-        setDescription("");
-        setTitle("");
-        toast.success("Doubt posted successfully!");
-      } else {
-        toast.warn("Description cannot be blank!");
-      }
+      await axiosClient.post("/create", {
+        title: title,
+        description: description,
+      });
+      setTitle("");
+      setDescription("");
+      toast.success("Doubt posted successfully!");
     } catch (error) {
       handleCatch(error);
     }
@@ -56,6 +52,7 @@ export default function AddPost() {
           placeholder="Title of the Doubt"
           required
           onChange={(e) => setTitle(e.target.value)}
+          value={title}
         />
         <ReactQuill
           theme="bubble"

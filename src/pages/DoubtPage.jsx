@@ -30,7 +30,10 @@ export default function DoubtPage() {
               <p>{doubtPost?.author?.username}</p>
             </div>
             <h1 className="p-2 text-2xl font-bold">{doubtPost?.title}</h1>
-            <p className="p-2">{doubtPost?.description}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: doubtPost?.description }}
+              className="p-2"
+            />
           </div>
           <div className="__comments_container p-3 m-3 rounded bg-gray-800">
             <h2 className=" text-xl font-bold">Comments</h2>
