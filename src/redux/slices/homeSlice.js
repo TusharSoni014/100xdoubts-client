@@ -5,21 +5,26 @@ import axiosClient from "../../utils/axiosClient";
 export const fetchLatestPosts = createAsyncThunk(
   "fetchLatestPosts",
   async (body) => {
-    const { page } = body;
+    const { page, filter } = body;
     try {
-      const response = await axiosClient.get(`/get-all-posts/${page}`);
+      const response = await axiosClient.get(
+        `/get-all-posts/${page}/${filter}`
+      );
       return { posts: response.data };
     } catch (error) {
       handleCatch(error);
     }
   }
 );
+
 export const fetchLoadMorePosts = createAsyncThunk(
   "fetchLoadMorePosts",
   async (body) => {
-    const { page } = body;
+    const { page, filter } = body;
     try {
-      const response = await axiosClient.get(`/get-all-posts/${page}`);
+      const response = await axiosClient.get(
+        `/get-all-posts/${page}/${filter}`
+      );
       return { posts: response.data };
     } catch (error) {
       handleCatch(error);
@@ -35,6 +40,7 @@ const homeSlice = createSlice({
     loading: false,
     loadMoreLoading: false,
     isMorePostAvailable: true,
+    filterMode: "latest",
   },
   reducers: {
     updatePage: (state, action) => {
@@ -48,6 +54,12 @@ const homeSlice = createSlice({
     },
     updateIsMorePostAvailable: (state, action) => {
       state.isMorePostAvailable = action.payload;
+    },
+    updateFilterMode: (state, action) => {
+      state.filterMode = action.payload;
+    },
+    clearPosts: (state) => {
+      state.allPosts = [];
     },
   },
   extraReducers: (builder) => {
@@ -74,7 +86,11 @@ const homeSlice = createSlice({
           );
         });
         state.allPosts = [...state.allPosts, ...newPosts];
+        const postsLength = action.payload.posts.length;
         state.loadMoreLoading = false;
+        if (postsLength < 20) {
+          state.isMorePostAvailable = false;
+        }
       })
       .addCase(fetchLoadMorePosts.pending, (state) => {
         state.loadMoreLoading = true;
@@ -90,5 +106,7 @@ export const {
   updatePageLoading,
   updateLoadMoreLoading,
   updateIsMorePostAvailable,
+  updateFilterMode,
+  clearPosts,
 } = homeSlice.actions;
 export default homeSlice.reducer;
