@@ -24,7 +24,7 @@ const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLatestPosts.fulfilled, (state, action) => {
-        state.allPosts = action.payload;
+        state.allPosts = [...state.allPosts, ...action.payload];
         state.loading = false;
       })
       .addCase(fetchLatestPosts.pending, (state) => {

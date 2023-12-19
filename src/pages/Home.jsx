@@ -15,19 +15,17 @@ export default function Home() {
   }, []);
   return (
     <div className="__home min-h-[calc(100dvh-60px)] w-full mt-10 p-5 gap-5 flex">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="__all_posts flex flex-col gap-5 w-full">
-            <FilterBar />
-            {posts.map((post, index) => {
-              return <DoubtPostItem key={index} post={post} />;
-            })}
-          </div>
-          <UserInfo />
-        </>
-      )}
+      <div className="__all_posts flex flex-col gap-5 w-full">
+        <FilterBar />
+        {loading ? (
+          <Loader />
+        ) : (
+          posts?.map((post, index) => {
+            return <DoubtPostItem key={index} post={post} />;
+          })
+        )}
+      </div>
+      <UserInfo />
     </div>
   );
 }
