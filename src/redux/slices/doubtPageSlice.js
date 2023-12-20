@@ -7,9 +7,7 @@ export const fetchDoubtPost = createAsyncThunk(
   async (body) => {
     const { doubtId } = body;
     try {
-      const response = await axiosClient.post("/get-doubt", {
-        doubtId: doubtId,
-      });
+      const response = await axiosClient.get(`/get-doubt/${doubtId}`);
       return response.data;
     } catch (error) {
       handleCatch(error);
