@@ -44,10 +44,10 @@ export default function DoubtPage() {
                 className="p-2"
               />
             </div>
-            <div className="__comments_container p-5 rounded bg-gray-800">
+            {/* <div className="__comments_container p-5 rounded bg-gray-800">
               <h2 className=" text-xl font-bold">Comments</h2>
               <div className="__comments">coming soon...</div>
-            </div>
+            </div> */}
           </div>
           <UserInfo />
         </div>

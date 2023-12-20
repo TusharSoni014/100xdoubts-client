@@ -136,17 +136,17 @@ export default function FilterBar() {
             placeholder="Search Doubts..."
             required
             value={searchText}
-            disabled={searchLoading}
+            disabled={searchLoading || autoRefresh}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
-            disabled={searchLoading}
+            disabled={searchLoading || autoRefresh}
             className=" h-full bg-green-500 transition hover:bg-green-700 text-white font-bold p-3 rounded disabled:bg-green-300 flex justify-center items-center"
             type="submit"
           >
             {searchLoading ? (
               <>
-                <TbLoader2 className="animate-spin" />
+                <TbLoader2 className="animate-spin font-bold" />
               </>
             ) : (
               <CiSearch />

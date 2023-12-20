@@ -8,3 +8,34 @@
 .quill > .ql-container > .ql-editor.ql-blank::before {
   color: grey;
 }
+.quill {
+  border-radius: 0.25rem !important ;
+}
+.ql-toolbar,
+.ql-container {
+  border: none !important;
+}
+.ql-container {
+  min-height: 200px !important;
+}
+.quill > .ql-toolbar span,
+.quill > .ql-toolbar svg,
+.quill > .ql-toolbar svg polygon,
+.quill > .ql-toolbar svg rect,
+.quill > .ql-toolbar svg circle,
+.quill > .ql-toolbar svg line,
+.quill > .ql-toolbar svg path,
+.quill > .ql-toolbar svg polyline {
+  transition-duration: 0.2s;
+  color: white !important;
+  stroke: white !important;
+}
+.ql-picker-options {
+  background-color: #1f2937 !important;
+}
+
+.ql-selected,
+.ql-picker-item:hover,
+.ql-active {
+  background-color: #374151 !important;
+}

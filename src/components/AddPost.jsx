@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.bubble.css";
-import { handleCatch } from "../utils/utilFunctions";
+import "react-quill/dist/quill.snow.css";
+import { handleCatch, topics } from "../utils/utilFunctions";
 import axiosClient from "../utils/axiosClient";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  updatePostDescription,
+  updatePostTitle,
+} from "../redux/slices/newDoubtSlice";
 
 export default function AddPost() {
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
+  const dispatch = useDispatch();
+  const postTitle = useSelector((state) => state.newDoubtSlice.title);
+  const postDescription = useSelector(
+    (state) => state.newDoubtSlice.description
+  );
   const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
   const navigate = useNavigate();
 
@@ -25,7 +32,7 @@ export default function AddPost() {
       [{ list: "ordered" }, { list: "bullet" }],
       [{ indent: "-1" }, { indent: "+1" }],
       ["link", "image"],
-      ["clean"],
+      ["code-block"],
     ],
   };
 
@@ -34,11 +41,11 @@ export default function AddPost() {
     try {
       if (isLoggedIn) {
         await axiosClient.post("/create", {
-          title: title,
-          description: description,
+          title: postTitle,
+          description: postDescription,
         });
-        setTitle("");
-        setDescription("");
+        dispatch(updatePostTitle(""));
+        dispatch(updatePostDescription(""));
         toast.success("Doubt posted successfully!");
       } else {
         navigate("/login");
@@ -48,25 +55,21 @@ export default function AddPost() {
     }
   };
   return (
-    <div className="__add_post_container p-3">
-      <h1 className="text-4xl my-3">Post a new Doubt</h1>
-      <form
-        onSubmit={handlePostDoubt}
-        className="flex flex-col gap-2 px-8 my-5"
-      >
+    <div className="__add_post_container w-full">
+      <form onSubmit={handlePostDoubt} className="flex flex-col gap-2">
         <input
           className="w-full outline-none p-2 rounded text-white bg-gray-600"
           type="text"
           placeholder="Title of the Doubt"
           required
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) => dispatch(updatePostTitle(e.target.value))}
+          value={postTitle}
         />
         <ReactQuill
-          theme="bubble"
-          value={description}
-          onChange={setDescription}
-          className="bg-gray-600 text-white rounded h-56"
+          theme="snow"
+          value={postDescription}
+          onChange={(value) => dispatch(updatePostDescription(value))}
+          className="bg-gray-600 text-white"
           placeholder="Type the description of the doubt here."
           modules={modules}
         />
@@ -75,6 +78,19 @@ export default function AddPost() {
           {/* <button className="bg-green-500 transition hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             + Add Image
           </button> */}
+          <select
+            onChange={(e) => console.log(e.target.value)}
+            className="block py-[10px] px-4 border rounded shadow-md transition border-none bg-gray-800 disabled:bg-gray-400"
+            value={"None"}
+          >
+            {topics.map((topic, index) => {
+              return (
+                <option key={index} value={topic}>
+                  {topic}
+                </option>
+              );
+            })}
+          </select>
           <button
             type="submit"
             className="bg-blue-500 transition hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

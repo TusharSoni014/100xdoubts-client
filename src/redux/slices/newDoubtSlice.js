@@ -5,7 +5,7 @@ const doubtPostSlice = createSlice({
   initialState: {
     title: "",
     description: "",
-    folder: "",
+    topic: "",
   },
   reducers: {
     updatePostTitle: (state, action) => {
@@ -14,9 +14,12 @@ const doubtPostSlice = createSlice({
     updatePostDescription: (state, action) => {
       state.description = action.payload;
     },
+    updatePostTopic: (state, action) => {
+      state.topic = action.payload;
+    },
   },
 });
 
-export const { updatePostDescription, updatePostTitle } =
+export const { updatePostDescription, updatePostTitle, updatePostTopic } =
   doubtPostSlice.actions;
 export default doubtPostSlice.reducer;
