@@ -4,26 +4,13 @@ import axiosClient from "../utils/axiosClient";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUpvotedPosts } from "../redux/slices/appSlice";
 import { useNavigate } from "react-router-dom";
+import UpvoteBtn from "./UpvoteBtn";
 
 export default function DoubtPostItem({ post }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.appSlice.user);
   const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
-  const handleUpvote = async () => {
-    if (isLoggedIn) {
-      await axiosClient.post("/upvote", {
-        postId: post.url,
-      });
-      dispatch(updateUpvotedPosts(post.url));
-    } else {
-      navigate("/login");
-    }
-    try {
-    } catch (error) {
-      handleCatch(error);
-    }
-  };
   return (
     <div className="__home_post_item p-4 bg-gray-800 rounded">
       <div className="__post_info flex justify-between items-center gap-2">
@@ -35,22 +22,7 @@ export default function DoubtPostItem({ post }) {
           <h1 className="font-bold text-xl cursor-pointer">{post?.title}</h1>
         </a>
         <div className="__post_item_right flex gap-2 justify-center items-center">
-          {user?.upvotedPosts?.includes(post?.url) ? (
-            <button
-              onClick={handleUpvote}
-              className="bg-red-500 transition h-fit hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Downvote
-            </button>
-          ) : (
-            <button
-              onClick={handleUpvote}
-              className="bg-green-500 transition h-fit hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Upvote
-            </button>
-          )}
-
+          <UpvoteBtn id={post?.url} />
           <div className="__info flex flex-col">
             <a
               target="_blank"

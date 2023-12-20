@@ -4,37 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchDoubtPost } from "../redux/slices/doubtPageSlice";
 import Loader from "../components/Loader";
 import UserInfo from "../components/UserInfo";
-import axiosClient from "../utils/axiosClient";
-import { updateUpvotedPosts } from "../redux/slices/appSlice";
-import { handleCatch } from "../utils/utilFunctions";
+import UpvoteBtn from "../components/UpvoteBtn";
 
 export default function DoubtPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { id } = useParams();
   const loading = useSelector((state) => state.doubtPageSlice.loading);
   const doubtPost = useSelector((state) => state.doubtPageSlice.doubtPostData);
-  const user = useSelector((state) => state.appSlice.user);
-  const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
 
   useEffect(() => {
     dispatch(fetchDoubtPost({ doubtId: id }));
   }, [dispatch]);
-
-  const handleUpvote = async () => {
-    if (isLoggedIn) {
-      await axiosClient.post("/upvote", {
-        postId: id,
-      });
-      dispatch(updateUpvotedPosts(id));
-    } else {
-      navigate("/login");
-    }
-    try {
-    } catch (error) {
-      handleCatch(error);
-    }
-  };
 
   return (
     <div className="__doubt_page w-full min-h-[calc(100dvh-60px)]">
@@ -53,23 +33,11 @@ export default function DoubtPage() {
                   />
                   <p>{doubtPost?.author?.username}</p>
                 </div>
-                {user?.upvotedPosts?.includes(id) ? (
-                  <button
-                    onClick={handleUpvote}
-                    className="bg-red-500 transition h-fit hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Downvote
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleUpvote}
-                    className="bg-green-500 transition h-fit hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Upvote
-                  </button>
-                )}
+                <UpvoteBtn id={id} />
               </div>
-              <p className="font-bold text-green-400">Upvotes: {doubtPost?.upvotes?.length}</p>
+              <p className="font-bold text-green-400">
+                Upvotes: {doubtPost?.upvotes?.length}
+              </p>
               <h1 className="p-2 text-2xl font-bold">{doubtPost?.title}</h1>
               <p
                 dangerouslySetInnerHTML={{ __html: doubtPost?.description }}
