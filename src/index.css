@@ -38,3 +38,9 @@
 .ql-active {
   background-color: #1f2937 !important;
 }
+pre {
+  background-color: black;
+  padding: 10px;
+  border-radius: 0.25rem;
+  width: fit-content;
+}
