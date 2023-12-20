@@ -13,6 +13,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.homeSlice.allPosts);
   const loading = useSelector((state) => state.homeSlice.loading);
+  const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
   const filterMode = useSelector((state) => state.homeSlice.filterMode);
   const isMorePostAvailable = useSelector(
     (state) => state.homeSlice.isMorePostAvailable
@@ -31,8 +32,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="__home min-h-[calc(100dvh-60px)] w-full p-3 gap-3 flex">
-        <div className="__all_posts flex gap-3 min-w-[70%]">
+      <div className="__home h-[calc(100dvh-60px)] w-full p-3 gap-3 flex relative">
+        <div className="__all_posts flex gap-3 min-w-[70%] overflow-auto">
           {loading ? (
             <Loader />
           ) : (
@@ -53,9 +54,9 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className="__right flex flex-col gap-3">
+        <div className="__right flex flex-col gap-3 sticky top-2">
           <AddPost />
-          <UserInfo />
+          {isLoggedIn && <UserInfo />}
           <FilterBar />
         </div>
       </div>

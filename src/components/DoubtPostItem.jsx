@@ -3,7 +3,7 @@ import UpvoteBtn from "./UpvoteBtn";
 
 export default function DoubtPostItem({ post }) {
   return (
-    <div className="__home_post_item p-3 bg-gray-800 rounded">
+    <div className="__home_post_item p-3 px-4 bg-gray-800 rounded">
       <div className="__post_info flex justify-between items-start gap-3">
         <div className="__post_item_left flex gap-2">
           <img

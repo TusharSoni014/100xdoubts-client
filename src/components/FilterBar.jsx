@@ -43,7 +43,7 @@ export default function FilterBar() {
   }, [autoRefresh]);
 
   return (
-    <div className="__filter_bar bg-gray-800 border-[1px] p-3 rounded sticky top-2 shadow-xl flex flex-col gap-3">
+    <div className="__filter_bar bg-gray-800 border-[1px] p-3 rounded shadow-xl flex flex-col gap-3">
       <p className="text-center font-bold">Options</p>
       <select
         disabled={autoRefresh}
