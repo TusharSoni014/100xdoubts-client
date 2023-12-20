@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { handleCatch, topics } from "../utils/utilFunctions";
@@ -9,11 +9,13 @@ import { useNavigate } from "react-router-dom";
 import {
   updatePostDescription,
   updatePostTitle,
+  updatePostTopic,
 } from "../redux/slices/newDoubtSlice";
 
 export default function AddPost() {
   const dispatch = useDispatch();
   const postTitle = useSelector((state) => state.newDoubtSlice.title);
+  const topic = useSelector((state) => state.newDoubtSlice.topic);
   const postDescription = useSelector(
     (state) => state.newDoubtSlice.description
   );
@@ -43,6 +45,7 @@ export default function AddPost() {
         await axiosClient.post("/create", {
           title: postTitle,
           description: postDescription,
+          topic: topic,
         });
         dispatch(updatePostTitle(""));
         dispatch(updatePostDescription(""));
@@ -70,18 +73,14 @@ export default function AddPost() {
           value={postDescription}
           onChange={(value) => dispatch(updatePostDescription(value))}
           className="bg-gray-600 text-white"
-          placeholder="Type the description of the doubt here."
+          placeholder="Type the description of the doubt here (Optional)."
           modules={modules}
         />
-        {/* <div className="__img_previews">[Images will preview here]</div> */}
         <div className="__btn_container flex justify-start items-center gap-2">
-          {/* <button className="bg-green-500 transition hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            + Add Image
-          </button> */}
           <select
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => dispatch(updatePostTopic(e.target.value))}
             className="block py-[10px] px-4 border rounded shadow-md transition border-none bg-gray-800 disabled:bg-gray-400"
-            value={"None"}
+            value={topic}
           >
             {topics.map((topic, index) => {
               return (
@@ -93,7 +92,7 @@ export default function AddPost() {
           </select>
           <button
             type="submit"
-            className="bg-blue-500 transition hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 transition hover:bg-blue-700 text-white font-bold py-2 px-10 rounded"
           >
             Post Doubt
           </button>

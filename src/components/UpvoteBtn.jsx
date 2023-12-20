@@ -4,7 +4,6 @@ import axiosClient from "../utils/axiosClient";
 import { useNavigate } from "react-router-dom";
 import { handleCatch } from "../utils/utilFunctions";
 import { updateUpvotedPosts } from "../redux/slices/appSlice";
-import Loader from "./Loader";
 import { TbLoader2 } from "react-icons/tb";
 
 export default function UpvoteBtn({ id }) {

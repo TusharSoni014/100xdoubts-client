@@ -3,7 +3,7 @@ import AddPost from "../components/AddPost";
 
 export default function Create() {
   return (
-    <div className="__create w-full min-h-[calc(100dvh-60px)] p-5 flex gap-5">
+    <div className="__create w-full min-h-[calc(100dvh-60px)] p-5 flex gap-2">
       <AddPost />
       <div className="__info p-5 bg-gray-800 rounded w-[400px]">
         <h1 className="text-xl font-bold mb-2">Posting a new Doubt</h1>

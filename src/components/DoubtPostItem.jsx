@@ -1,16 +1,7 @@
 import React from "react";
-import { handleCatch } from "../utils/utilFunctions";
-import axiosClient from "../utils/axiosClient";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUpvotedPosts } from "../redux/slices/appSlice";
-import { useNavigate } from "react-router-dom";
 import UpvoteBtn from "./UpvoteBtn";
 
 export default function DoubtPostItem({ post }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.appSlice.user);
-  const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
   return (
     <div className="__home_post_item p-4 bg-gray-800 rounded">
       <div className="__post_info flex justify-between items-center gap-2">

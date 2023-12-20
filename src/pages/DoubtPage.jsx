@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchDoubtPost } from "../redux/slices/doubtPageSlice";
 import Loader from "../components/Loader";
 import UserInfo from "../components/UserInfo";

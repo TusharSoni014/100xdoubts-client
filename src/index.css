@@ -31,11 +31,10 @@
   stroke: white !important;
 }
 .ql-picker-options {
-  background-color: #1f2937 !important;
+  background-color: #343d49 !important;
 }
-
 .ql-selected,
 .ql-picker-item:hover,
 .ql-active {
-  background-color: #374151 !important;
+  background-color: #1f2937 !important;
 }
