@@ -42,6 +42,7 @@ const homeSlice = createSlice({
     isMorePostAvailable: true,
     filterMode: "latest",
     autoRefresh: false,
+    searchMode: false,
   },
   reducers: {
     updatePage: (state, action) => {
@@ -61,6 +62,12 @@ const homeSlice = createSlice({
     },
     updateFilterMode: (state, action) => {
       state.filterMode = action.payload;
+    },
+    updateSearchMode: (state, action) => {
+      state.searchMode = action.payload;
+    },
+    updateAllPosts: (state, action) => {
+      state.allPosts = action.payload;
     },
     clearPosts: (state) => {
       state.allPosts = [];
@@ -112,6 +119,8 @@ export const {
   updateIsMorePostAvailable,
   updateAutoRefresh,
   updateFilterMode,
+  updateSearchMode,
+  updateAllPosts,
   clearPosts,
 } = homeSlice.actions;
 export default homeSlice.reducer;

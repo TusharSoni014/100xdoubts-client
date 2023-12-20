@@ -15,6 +15,7 @@ export default function Home() {
   const isMorePostAvailable = useSelector(
     (state) => state.homeSlice.isMorePostAvailable
   );
+  console.log(posts.length);
 
   useEffect(() => {
     dispatch(fetchLatestPosts({ page: 1, filter: filterMode }));
@@ -31,11 +32,12 @@ export default function Home() {
             return <DoubtPostItem key={index} post={post} />;
           })
         )}
-        {isMorePostAvailable && (
+        {isMorePostAvailable && posts.length !== 0 ? (
           <div className="__btn_container flex justify-center items-center">
             <LoadMoreBtnHome />
           </div>
-        )}
+        ) : null}
+        {posts.length === 0 && <p className="text-center text-gray-600 font-bold select-none text-xl">No Posts Found!</p>}
       </div>
       <UserInfo />
     </div>
