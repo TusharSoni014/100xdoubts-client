@@ -49,6 +49,7 @@ export default function AddPost() {
         });
         dispatch(updatePostTitle(""));
         dispatch(updatePostDescription(""));
+        dispatch(updatePostTopic("General"));
         toast.success("Doubt posted successfully!");
       } else {
         navigate("/login");

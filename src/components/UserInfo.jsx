@@ -7,10 +7,13 @@ export default function UserInfo() {
   const isLoggedIn = useSelector((state) => state.appSlice.isLoggedIn);
   const navigate = useNavigate();
   return (
-    <div className="__user_info p-4 rounded bg-gray-800 w-[400px] h-fit flex flex-col gap-3">
+    <div className="__user_info p-4 rounded bg-gray-800 w-full h-fit flex flex-col gap-3">
       <h3 className="font-bold text-xl">Welcome to 100xDoubts</h3>
       {isLoggedIn ? (
-        <p>You are logged in as <span className="font-bold">{user.username}</span></p>
+        <p>
+          You are logged in as{" "}
+          <span className="font-bold">{user.username}</span>
+        </p>
       ) : (
         <>
           <button

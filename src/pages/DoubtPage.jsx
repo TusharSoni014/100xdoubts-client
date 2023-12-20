@@ -14,7 +14,7 @@ export default function DoubtPage() {
 
   useEffect(() => {
     dispatch(fetchDoubtPost({ doubtId: id }));
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="__doubt_page w-full min-h-[calc(100dvh-60px)]">
@@ -22,7 +22,7 @@ export default function DoubtPage() {
         <Loader />
       ) : (
         <div className="flex p-5 gap-5">
-          <div className="__post_details w-full flex flex-col gap-5">
+          <div className="__post_details w-full flex flex-col gap-5 min-w-[70%]">
             <div className="p-5 flex flex-col gap-3 bg-gray-800 rounded">
               <div className="__author flex items-center gap-3">
                 <div className=" bg-gray-700 cursor-pointer w-fit flex justify-center items-center gap-2 rounded px-3 py-2">
@@ -38,10 +38,19 @@ export default function DoubtPage() {
               <p className="font-bold text-green-400">
                 Upvotes: {doubtPost?.upvotes?.length}
               </p>
-              <h1 className="p-2 text-2xl font-bold">{doubtPost?.title}</h1>
+              <div className="__title">
+                <h1 className="p-2 text-2xl font-bold break-all break-words">
+                  {doubtPost?.title}
+                </h1>
+                {doubtPost?.topic && (
+                  <p className=" rounded-full bg-green-900 w-fit px-4 font-bold">
+                    Topic: {doubtPost?.topic}
+                  </p>
+                )}
+              </div>
               <p
                 dangerouslySetInnerHTML={{ __html: doubtPost?.description }}
-                className="p-2"
+                className="p-2 break-words break-all overflow-auto"
               />
             </div>
             {/* <div className="__comments_container p-5 rounded bg-gray-800">

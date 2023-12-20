@@ -23,11 +23,6 @@ export default function FilterBar() {
   const [searchText, setSearchText] = useState("");
   const [searchLoading, setSearchLoading] = useState(false);
 
-  useEffect(() => {
-    dispatch(clearPosts());
-    dispatch(fetchLatestPosts({ page: 1, filter: filterMode }));
-  }, [filterMode]);
-
   const handleAutoRefresh = async () => {
     try {
       dispatch(updateAutoRefresh(!autoRefresh));
@@ -46,7 +41,7 @@ export default function FilterBar() {
       clearInterval(refreshPostsTimerRef.current);
     }
     return () => clearInterval(refreshPostsTimerRef.current);
-  }, [autoRefresh, dispatch]);
+  }, [autoRefresh]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -86,6 +81,18 @@ export default function FilterBar() {
             >
               Refresh Posts
             </button>
+            <select
+              disabled={autoRefresh}
+              onChange={(e) => {
+                dispatch(updateFilterMode(e.target.value));
+              }}
+              value={filterMode}
+              className="block p-2 border rounded shadow-md transition border-none bg-gray-800 disabled:bg-gray-400"
+            >
+              <option value="latest">Latest</option>
+              <option value="asc-upvotes">Lowest Upvotes</option>
+              <option value="des-upvotes">Highest Upvotes</option>
+            </select>
             <button
               onClick={handleAutoRefresh}
               className={`${
@@ -104,18 +111,6 @@ export default function FilterBar() {
                 </>
               )}
             </button>
-            <select
-              disabled={autoRefresh}
-              onChange={(e) => {
-                dispatch(updateFilterMode(e.target.value));
-              }}
-              value={filterMode}
-              className="block p-2 border rounded shadow-md transition border-none bg-gray-800 disabled:bg-gray-400"
-            >
-              <option value="latest">Latest</option>
-              <option value="asc-upvotes">Lowest Upvotes</option>
-              <option value="des-upvotes">Highest Upvotes</option>
-            </select>
           </>
         ) : (
           <>

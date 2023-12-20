@@ -4,13 +4,20 @@ import UpvoteBtn from "./UpvoteBtn";
 export default function DoubtPostItem({ post }) {
   return (
     <div className="__home_post_item p-4 bg-gray-800 rounded">
-      <div className="__post_info flex justify-between items-center gap-2">
+      <div className="__post_info flex justify-between items-center gap-5">
         <a
           target="_blank"
           href={`/doubt/${post?.url}`}
           className="__post_item_left"
         >
-          <h1 className="font-bold text-xl cursor-pointer">{post?.title}</h1>
+          <h1 className="font-bold text-xl cursor-pointer break-all break-words">
+            {post?.title}
+          </h1>
+          {post?.topic && (
+            <p className=" rounded-full bg-green-900 w-fit px-4 mt-2 font-bold">
+              Topic: {post?.topic}
+            </p>
+          )}
         </a>
         <div className="__post_item_right flex gap-2 justify-center items-center">
           <UpvoteBtn id={post?.url} />

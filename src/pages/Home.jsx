@@ -17,12 +17,14 @@ export default function Home() {
   );
 
   useEffect(() => {
-    dispatch(fetchLatestPosts({ page: 1, filter: filterMode }));
+    if (posts.length === 0) {
+      dispatch(fetchLatestPosts({ page: 1, filter: filterMode }));
+    }
   }, []);
 
   return (
     <div className="__home min-h-[calc(100dvh-60px)] w-full mt-10 p-5 gap-5 flex">
-      <div className="__all_posts flex flex-col gap-5 w-full">
+      <div className="__all_posts flex flex-col gap-5 min-w-[70%]">
         <FilterBar />
         {loading ? (
           <Loader />
