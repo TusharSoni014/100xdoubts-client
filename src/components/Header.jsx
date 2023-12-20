@@ -36,12 +36,6 @@ export default function Header() {
             >
               <CiLogout />
             </button>
-            <button
-              onClick={() => navigate("/create")}
-              className="bg-green-500 transition hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            >
-              + New Doubt
-            </button>
             <button className="__avatar_btn w-[40px] h-[40px]">
               <img
                 className="w-full h-full rounded-[50%]"

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { handleCatch } from "../utils/utilFunctions";
 import { updateUpvotedPosts } from "../redux/slices/appSlice";
 import { TbLoader2 } from "react-icons/tb";
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 
 export default function UpvoteBtn({ id }) {
   const [loading, setLoading] = useState(false);
@@ -34,17 +35,17 @@ export default function UpvoteBtn({ id }) {
     <button
       onClick={handleUpvote}
       disabled={loading}
-      className="bg-red-500 transition h-fit hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center gap-2 disabled:bg-red-300"
+      className="bg-red-500 transition h-fit hover:bg-red-700 text-white font-bold p-2 rounded flex justify-center items-center gap-2 disabled:bg-red-300"
     >
-      {loading && <TbLoader2 className="animate-spin" />} Downvote
+      {loading && <TbLoader2 className="animate-spin" />} <BiDownvote />
     </button>
   ) : (
     <button
       onClick={handleUpvote}
       disabled={loading}
-      className="bg-green-500 transition h-fit hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center gap-2 disabled:bg-green-300"
+      className="bg-green-500 transition h-fit hover:bg-green-700 text-white font-bold p-2 rounded flex justify-center items-center gap-2 disabled:bg-green-300"
     >
-      {loading && <TbLoader2 className="animate-spin" />} Upvote
+      {loading && <TbLoader2 className="animate-spin" />} <BiUpvote />
     </button>
   );
 }

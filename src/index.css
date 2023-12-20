@@ -15,9 +15,6 @@
 .ql-container {
   border: none !important;
 }
-.ql-container {
-  min-height: 200px !important;
-}
 .quill > .ql-toolbar span,
 .quill > .ql-toolbar svg,
 .quill > .ql-toolbar svg polygon,
